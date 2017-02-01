@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html ng-app="App" ng-cloak>
+  <head>
+    <meta charset="utf-8">
+    <title>Stocks App</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"> </script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script type="text/javascript" src="js/lib/ui-bootstrap-tpls-2.5.0.min.js"></script>
+    <script src="//unpkg.com/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" ui-sref="/">Stock Trader</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">Sign In</a></li>
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+  <main class="container" ng-controller="StockCtrl">
+
+    <div class="stocks col-md-5">
+
+      <span id="stockText">Stocks</span>
+      <input type="text" name="stockFilter" ng-model="stockFilter" class="pull-right" placeholder="Search"/>
+      <table class="table table-striped ">
+        <tr>
+          <th>Symbol</th>
+          <th>Price</th>
+          <th>1d</th>
+          <th>7d</th>
+          <th>30d</th>
+          <th>Trade?</th>
+        </tr>
+        <tr ng-repeat="stock in stocks.query.results.quote | filter:stockFilter">
+            <td>{{ stock["Symbol"] }}</td>
+            <td>{{ stock["Open"] | currency }}</td>
+            <td>$2.39</td>
+            <td>-$1.38</td>
+            <td>+1.33</td>
+            <td><a href="#">trade</a></td>
+        </tr>
+      </table>
+    </div>
+
+    <form class="col-md-6">
+      01/01/2014  <span class="selectedDate" ng-if="date">{{ date }}/11/2014</span>
+      <p class="pull-right">12/31/2014</p>
+      <input type="range" min="1" max="12" step="1" ng-init="1" ng-model="date">
+    </form>
+  <!-- <div date-range></div> -->
+
+  </main>
+  <script type="text/javascript" src="js/app.js"></script>
+  <script type="text/javascript" src="js/controllers/stockController.js"></script>
+  <script type="text/javascript" src="js/directives/dateRange.js"></script>
+  <script type="text/javascript" src="js/directives/stocks.js"></script>
+</body>
+</html>

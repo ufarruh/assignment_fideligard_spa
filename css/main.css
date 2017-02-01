@@ -1,0 +1,12 @@
+.selectedDate {
+  color: rgb(125, 249, 67);
+  padding-left: 170px;
+}
+
+.stocks {
+  border: 1px solid black;
+}
+
+#stockText {
+  font-size: 25px;
+}
