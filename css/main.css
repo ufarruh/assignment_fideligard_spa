@@ -10,3 +10,8 @@
 #stockText {
   font-size: 25px;
 }
+
+.trade {
+  border: 1px solid black;
+  height: 730px;
+}

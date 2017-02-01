@@ -14,9 +14,9 @@
 
   <body>
     <nav class="navbar navbar-default">
-    <div class="container">
+    <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" ui-sref="/">Stock Trader</a>
+        <a class="navbar-brand" ui-sref="dashboard">Stock Trader</a>
       </div>
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -25,19 +25,19 @@
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">Sign In</a></li>
-        </ul>
 
+        </ul>
       </div>
     </div>
   </nav>
-  <main class="container" ng-controller="StockCtrl">
+  <main class="container-fluid" ng-controller="StockCtrl">
 
     <div class="stocks col-md-5">
-
+      <br />
       <span id="stockText">Stocks</span>
-      <input type="text" name="stockFilter" ng-model="stockFilter" class="pull-right" placeholder="Search"/>
-      <table class="table table-striped ">
+      <div class="pull-right">Filter: <input type="text" name="stockFilter" ng-model="stockFilter" placeholder="Search"/></div>
+      <br /><br />
+      <table class=" table table-striped ">
         <tr>
           <th>Symbol</th>
           <th>Price</th>
@@ -49,10 +49,10 @@
         <tr ng-repeat="stock in stocks.query.results.quote | filter:stockFilter">
             <td>{{ stock["Symbol"] }}</td>
             <td>{{ stock["Open"] | currency }}</td>
-            <td>$2.39</td>
-            <td>-$1.38</td>
+            <td>{{ stock["Close"] - stock["Open"] | currency }}</td>
+            <td>{{ sevenDay(stock["2014-12-31"]) | currency }}</td>
             <td>+1.33</td>
-            <td><a href="#">trade</a></td>
+            <td><a ui-sref="dashboard.trade" ng-click="tradeStock(stock)">trade</a></td>
         </tr>
       </table>
     </div>
@@ -62,12 +62,14 @@
       <p class="pull-right">12/31/2014</p>
       <input type="range" min="1" max="12" step="1" ng-init="1" ng-model="date">
     </form>
-  <!-- <div date-range></div> -->
+    <br /><br /><br />
+    <div ui-view="dash"></div>
 
   </main>
   <script type="text/javascript" src="js/app.js"></script>
   <script type="text/javascript" src="js/controllers/stockController.js"></script>
   <script type="text/javascript" src="js/directives/dateRange.js"></script>
   <script type="text/javascript" src="js/directives/stocks.js"></script>
+  <script type="text/javascript" src="js/services/stockService.js"></script>
 </body>
 </html>

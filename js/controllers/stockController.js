@@ -1,11 +1,19 @@
-App.controller("StockCtrl", ["$scope", "$http", function($scope, $http){
+App.controller("StockCtrl", ["$scope", "StockService", function($scope, StockService){
 
-  function all(){
-    return $http.get("js/data/yql.json")
+    StockService.all()
       .then(function(response){
-        $scope.stocks = response.data;
+        $scope.stocks = response;
       });
-  }
 
-  all();
+      $scope.tradeStock = function(stock){
+        $scope.stock = stock;
+        console.log(stock);
+      }
+
+      $scope.cost = function(price){
+        var price = parseInt(price);
+        var total = price * $scope.quantity;
+        console.log($scope.quantity);
+        return total;
+      }
 }]);

@@ -1,0 +1,19 @@
+<div class="col-md-6 trade">
+  <h3>Trade</h3>
+  <select class="pull-right" ng-model="val">
+    <option ui-sref="dashboard.trade">Trade</option>
+    <option ui-sref="dashboard.transactions">Transaction</option>
+    <option ui-sref="dashboard.portfolio">Portfolio</option>
+  </select>
+
+
+  <h3> Symbol: {{ stock["Symbol"] }}</h3>
+  <select>
+    <option value="buy">Buy</option>
+    <option value="sell">Sell</option>
+  </select>
+  <input type="number" ng-model="quantity">
+  <input type="date" name="" value="">
+  <h3>Price: {{ stock["Open"] | currency }}</h3>
+  <h3>Cost: {{ cost(stock["Open"]) | currency }}</h3>
+</div>
